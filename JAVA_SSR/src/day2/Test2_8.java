@@ -25,10 +25,23 @@ public class Test2_8 {
 		 * 입력받은 연산자가 /이면 /한 결과를 출력하고,
 		 * 입력받은 연산자가 %이면 %한 결과를 출력하고,
 		 */
+		double result = 0.0;
 		
 		if(op == '+') {
-			System.out.println("" + num1 + "" + op + "" + num2 + " = " + (num2 + num2));
+			result = num1 + num2;
+		}else if(op == '-') {
+			result = num1 - num2;
+		}else if(op == '*') {
+			result = num1 *num2;
+		}else if(op == '%') {
+			result = num1 % num2;
+		}else if(op == '/') {
+			result = (double)num1 / num2;
 		}
+		System.out.println("" + num1 + "" + num2 + " = " + result);
+		
+		scan.close();
+		
 		
 		
 		
