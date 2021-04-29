@@ -24,7 +24,7 @@ public class Break {
 			ch = scan.next().charAt(0);
 			if(ch == 'q' || ch == 'Q') {
 				break;
-			}
+			                                           }
 		}
 		scan.close();
 	}
