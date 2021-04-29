@@ -17,7 +17,7 @@ public class For7 {
 		 * 규칙성 : i가 num1의 약수이고 i가 num2의 약수이면 i를 변수 gcd에 저장
 		 * 반복문 종료 후 : gcd를 출력
 		 * */
-		int i, num1 = 7, num2 = 12;
+		int i, num1 = 8, num2 = 12;
 		int gcd = 1;
 		for(i=1; i<=num1; i+=1) {
 			if(num1 % i == 0 && num2 % i == 0) {
