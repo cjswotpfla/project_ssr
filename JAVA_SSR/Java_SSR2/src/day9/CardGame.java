@@ -21,7 +21,7 @@ public class CardGame {
 		//아래와 같이 풀하우스,트리플,페어로 판별 가능한 경우
 		//풀하우스 하나만 출력
 		//아래는 1풀하우스입니다 라고 출력
-		int arr[]=new int[] {1,1,1,2,2,6,7};
+		int arr[]=new int[] {1,2,2,3,4,5,6};
 
 		System.out.println("포커 : " + poker(arr));
 		System.out.println("트리플 : " + triple(arr));
@@ -222,6 +222,9 @@ public class CardGame {
 		int cnt = 1;
 		int num = 0;
 		for(int i=0;i<card.length-1;i+=1) {
+			if(card[i]==card[i+1]) {
+				continue;
+			}
 			if(card[i]+1==card[i+1]) {
 				cnt+=1;
 				num=card[i+1];
