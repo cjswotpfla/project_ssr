@@ -33,7 +33,6 @@ public class Test8_7 {
 			}else {
 				if(cnt==2) {
 					res+=1;
-	
 				}
 				cnt=1;
 			}
