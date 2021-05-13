@@ -5,7 +5,7 @@ public class InheritanceTest {
 		Parent p = new Parent();
 		p.print();
 		Child c = new Child();
-		c.num2=10;
+		//c.num2=10;
 		c.num3=10;
 		c.num4=10;
 		c.print();
@@ -22,7 +22,7 @@ class Parent{
 }
 class Child extends Parent{
 	public void print2() {
-		System.out.println("num2 : "+num2);
+		//System.out.println("num2 : "+num2);
 		System.out.println("num3 : "+num3);
 		System.out.println("num4 : "+num4);
 	}
