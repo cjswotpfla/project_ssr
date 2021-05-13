@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 public class BoardProgram {
 	private Board board[];
-	private Scanner scan;
-	private int cnt;
+	private Scanner scan; int cnt;
 	public BoardProgram() {//기본생성자
 		//board = new Board[10];
 		//scan = new Scanner(System.in);
