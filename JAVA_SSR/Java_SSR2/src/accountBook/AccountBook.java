@@ -1,73 +1,33 @@
 package accountBook;
 
+
 public class AccountBook {
-	private String type;
-	private String date;
-	private String assets;
-	private String classification;
-	private int price;
-	private String contents;
+
+	 //가계부 내역들
+	private Item arr[];
+	private int cnt; //저장된 내역들 갯수
+	private int total;//내역에 기입된 금액의 총 양
 		
-	public AccountBook(String type, String date, String assets, String classification, int price,
-			String contents) {
-		this.type =type;
-		this.date = date;
-		this.assets = assets;
-		this.classification = classification;
-		this.price = price;
-		this.contents = contents;
-	}
+	/* 기능 : 내역이 주어지면 주어진 내역을 가계부에 저장하는 메소드
+	 * 매개변수 : 가계부 내역 Item
+	 * 리턴타입 : 없음 void
+	 * 메소드명 : accountSave
+	 */
 	
 	
-	
-	
-	public String getType() {
-		return type;
-	}
+	/* 기능 : 저장된내역을 출력하는 기능을 하는 메소드 생성
+	 * 매개변수 : Item arr[]
+	 * 리턴타입 : 없음 void
+	 * 메소드명 : print
+	 */
 
-	public void setType(String type) {
-		this.type = type;
-	}
 
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public String getAssets() {
-		return assets;
-	}
-
-	public void setAssets(String assets) {
-		this.assets = assets;
-	}
-
-	public String getClassification() {
-		return classification;
-	}
-
-	public void setClassification(String classification) {
-		this.classification = classification;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public String getContents() {
-		return contents;
-	}
-
-	public void setContents(String contents) {
-		this.contents = contents;
-	}
+	/*System.out.println("수입/지출 : " +type);
+	System.out.println("날짜 : " + date);
+	System.out.println("자산(현금,은행,카드) : "+ assets);
+	System.out.println("분류(식비,교통,건강) : "+ classification);
+	System.out.println("금액 : " + price);
+	System.out.println("내용 : " + contents);*/
 	
 
 
