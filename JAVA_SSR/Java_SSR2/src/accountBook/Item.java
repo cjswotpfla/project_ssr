@@ -39,6 +39,16 @@ public class Item {
 	public int getCost() {
 		return cost;
 	}
+	public int calCost() {
+		switch(type) {
+		case "지출":
+			return-cost;
+		case "수입":
+			return+cost;
+		default:
+			return 0;
+		}
+	}
 	public void setCost(int cost) {
 		this.cost = cost;
 	}
@@ -75,14 +85,6 @@ public class Item {
 		if(contents!=null)
 			this.contents = contents;
 	}
-	/**/
-	public void print() {
-		System.out.println("수입 : "+type);
-		System.out.println("날짜 : "+date);
-		System.out.println("자산(현금,은행,카드) : "+paymentType);
-		System.out.println("분류(식비,교통,건강) : "+category);
-		System.out.println("금액 : " + cost);
-		System.out.println("내용 : " + contents);
-	}
+
 	
 }
