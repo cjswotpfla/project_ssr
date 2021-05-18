@@ -16,7 +16,7 @@ public class AccountBookProgram2 {
 		book.insert(item);
 	}
 	public void update() {
-		System.out0.print("수정할 내역 번호 선택 : ");
+		System.out.print("수정할 내역 번호 선택 : ");
 		int index = scan.nextInt();
 		if(index<1||index>book.getCnt()) {
 			System.out.println("없는 내역입니다. 수정할 수 없습니다.");
