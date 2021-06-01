@@ -1,0 +1,46 @@
+과일가게에서 과일 판매를 관리하려고 한다.
+이를 ERD로 작성한 후 DB와 테이블을 생성하세요(서비스x)
+DB명 : fruit_shop
+
+- 과일 입고, 출고, 판매
+- 판매 내역, 구매 내역
+
+- 판매자
+  - 판매자번호 int 기본키
+  - 판매자명 varchar(50) not null
+  - 사업자등록번호 int
+  - 판매회사상호명 varchar(40) not null
+- 판매
+  - 판매번호 int 기본키
+  - 판매수량 int not null
+  - 판매일 date not null
+  - 판매자번호 int not null 외래키
+  - 과일번호 int not null 외래키
+- 과일
+  - 과일번호 int 기본키
+  - 과일명 varchar(20) not null
+  - 생산년월 date not null
+  - 원산지 varchar(20) not null
+  - 유기농여부 char(1) 
+  - 재고량 int not null
+
+- 납품자
+  - 납품자번호 int 기본키
+  - 납품자명 varchar(50) not null
+  - 납품지주소 varchar(50) not null
+  - 납품회사명 varchar(40) not null
+
+- 납품
+  - 납품일자 date not null
+  - 납품번호 int 기본키 
+  - 과일번호 int 외래키 not null
+  - 납품자번호 int 외래키 not null
+  - 납품수량 varchar(50) not null
+
+A과수원에서 사과 100상자 입고되었다. 상자당 가격은 10000원
+손님이 사과 1상자를 개당 20000원에 구매를 했다
+오늘 과일 판매액을 확인
+총 매출액 확인
+
+트리거
+과일을 입고하거나 판매하면 재고량이 입고/판매량에 맞춰 변하는 트리거 생성
