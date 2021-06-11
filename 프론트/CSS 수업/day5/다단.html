@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>다단 예제</title>
+	<style>
+		/*
+		- column-count : 다단 갯수
+		- column-gap : 단과 단 사이에 여백
+		- column-rule : 단 선 모양
+		- column-span : h태그가 포함되면 해당 부분의 단을 해제할지 말지를 결정하는 속성
+		- column-width : 브라우저에 대한 최소 너비
+		*/		
+		p{
+			width: 600px;
+			column-count: 2;
+			column-gap: 20px;
+			column-rule: 1px solid red;
+			column-span: all;
+			column-width: 250px;
+			text-align: justify;
+		}
+		body h1{column-span: all;}
+	</style>
+</head>
+<body>
+	<h1>광주 건물 붕괴사고</h1>
+	<p>
+		17명의 사상자를 낸 광주 건물 붕괴 사고 현장 공사 관계자들이 피의자로 경찰에 입건됐습니다.
+		광주경찰청은 광주 학동 재개발 철거 공사 관계자 등 4명을 업무상 과실치사상 혐의로 입건해 출국금지 조처했다고 밝혔습니다.
+
+		경찰은 이들이 철거 현장에서 적절한 안전 조치를 하지 않은 정황을 일부 확인했습니다.
+		
+		앞서 경찰은 시공사 현장사무소와 철거업체 서울 본사 등 5곳을 어제 압수 수색했습니다.
+
+		경찰은 여기서 확보한 압수물과 관련자 진술 등을 토대로 해체계획서 준수 여부를 들여다볼 예정입니다.
+
+		또 철거 업체 선정 과정이나 철거 업체 간 계약 과정에서 불법행위가 있었는지 조사하기로 했습니다.
+
+		이 밖에 인허가를 맡은 행정기관의 관리·감독이 제대로 됐는지에 대해서도 파악할 방침입니다.
+
+		김민성 [kimms0708@ytn.co.kr]
+	</p>
+</body>
+</html>
