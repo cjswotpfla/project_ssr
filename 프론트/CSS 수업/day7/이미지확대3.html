@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>이미지 확대 예제3</title>
+	<style>
+		*{ padding: 0; margin: 0; text-decoration: none; color: #000;}
+		.big-box{
+			width: 874px; padding: 10px; border: 1px solid red;
+		}
+		.box{width: 410px; border: 1px solid black; padding: 10px;float: left;}
+		.inner-box::after, .inner-container::after{clear: both; content: ''; display: block;}
+		
+		.img-box{width: 200px; height: 200px; border: 1px solid black; 
+			overflow: hidden; float: left;}
+		.img-box img{width: 200px; height: 200px; transition: transform 1s;}
+		.box:hover img{ transform: scale(1.2);}
+		
+		.group-box{width: 200px; height: 200px; float: right;}
+		p.title{ height: 25px; line-height: 25px; font-size: 20px}
+		p.contents{ height: 175px; line-height: 20px; font-size: 15px;}
+		.group-box:hover p.title{text-decoration: underline;}
+
+		.box2{width: 410px; border: 1px solid black; padding: 10px;float: right;}
+		.box2.inner-box::after{clear: both; content: ''; display: block;}
+		
+		.box2.img-box{width: 200px; height: 200px; border: 1px solid black; 
+			overflow: hidden; float: left;}
+		.box2.img-box img{width: 200px; height: 200px; transition: transform 1s;}
+		.box2.box:hover img{ transform: scale(1.2);}
+		
+		.box2.group-box{width: 200px; height: 200px; float: right;}
+		.box2p.title{ height: 25px; line-height: 25px; font-size: 20px}
+		.box2p.contents{ height: 175px; line-height: 20px; font-size: 15px;}
+		.box2.group-box:hover p.title{text-decoration: underline;}
+	
+	</style>
+</head>
+<body>
+	<div class="big-box">
+		<div class="inner-container">
+			<div class="box">
+				<div class="inner-box">
+					<div class="img-box">
+						<img src="../img/고양이1.jpg" alt="">
+					</div>
+					<div class="group-box">
+						<p class="title">고양이는 예쁘다.</p>
+						<p class="contents">나는 고양이를 너무 사랑합니다 하하하하하 아이 러브 냐옹쓰!
+							점심시간이 7분 정도 남았군요! 너무 배가 고픕니다! 뭐먹지!!
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="box2">
+				<div class="inner-box">
+					<div class="img-box">
+						<img src="../img/고양이1.jpg" alt="">
+					</div>
+					<div class="group-box">
+						<p class="title">고양이는 예쁘다.</p>
+						<p class="contents">나는 고양이를 너무 사랑합니다 하하하하하 아이 러브 냐옹쓰!
+							점심시간이 7분 정도 남았군요! 너무 배가 고픕니다! 뭐먹지!!
+						</p>
+					</div>
+				</div>
+			</div>		
+		</div>
+	</div>
+</body>
+</html>
