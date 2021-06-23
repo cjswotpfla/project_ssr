@@ -10,10 +10,10 @@
 		$(function(){
 			$('select[name=email_select]').change(function(){
 				var email_suffix = $(this).val();
-				$('input[name=email_suffix]').val(email_suffix);	
+				$('input[name=email_suffix]').val(email_suffix);
 				var readonly = email_suffix == '' ? false : true;
-				$('input[name=email_suffix]').prop('readonly', readonly)
-			});
+				$('input[name=email_suffix]').prop('readonly', readonly);
+			})
 			$('form').submit(function(){
 				var email_prefix = $('input[name=email_prefix]').val();
 				var email_suffix = $('input[name=email_suffix]').val();
@@ -21,18 +21,18 @@
 				$('input[name=email]').val(email);
 				return false;
 			})
-		});
+		})
 	</script>
 </head>
 <body>
-	<form action="">
+	<form>
 		<input type="text" name="email_prefix">@
 		<input type="text" name="email_suffix">
 		<select name="email_select">
 			<option value="">직접입력</option>
 			<option value="gmail.com">gmail.com</option>
 			<option value="naver.com">naver.com</option>
-			<option value="hanmail.net">hanmail.net</option>
+			<option value="hanmail.com">hanmail.com</option>
 		</select>
 		<input type="hidden" name="email">
 		<button type="submit">전송</button>
