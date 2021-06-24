@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>롤링 예제</title>
+	<script src="../js/jquery.min.js"></script>
+	<script src="../js/rolling.js"></script>
+	<script>
+		$(function(){
+			setInterval(function(){
+				if(!$('.box1 li').first().is(':animated')){
+				var width = $('.box1 li').first().width();
+				$('.box1 li').last().detach().prependTo('.box1').css('margin-left',-width+'px')
+					.animate({'margin-left':'0px'},800)
+				}
+			},1000);
+		})
+	</script>
+		<style>
+			.view-box{height: 50px;border: 2px solid black;  overflow: hidden; }
+			.box1{list-style: none;  padding: 0; margin: 0; width: 400%;}
+			.box1::after{display: block; content: ''; clear: both;}
+			li{
+			width: 25%; height: 50px; line-height: 50px; text-align: center;
+			font-size: 25px; float: left; background: yellow;
+			}
+		</style>
+</head>
+<body>
+	<div class="view-box">
+		<ul class="box1">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+	</div>
+</body>
+</html>
