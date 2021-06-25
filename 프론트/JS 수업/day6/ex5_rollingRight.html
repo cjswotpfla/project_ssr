@@ -4,28 +4,27 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>롤링 예제</title>
+	<title>롤링 예제3</title>
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/rolling.js"></script>
 	<script>
+		var id;
 		$(function(){
-			setInterval(function(){
-				if(!$('.box1 li').first().is(':animated')){
-				var width = $('.box1 li').first().width();
-				$('.box1 li').last().detach().prependTo('.box1').css('margin-left',-width+'px')
-					.animate({'margin-left':'0px'},800)
-				}
-			},1000);
+			//id = rollingRight('.box1', 'li', 800, 1000);
+			id = rolling('right','.box1','li',0,800,1000);
+		
 		})
+
 	</script>
 		<style>
-			.view-box{height: 50px;border: 2px solid black;  overflow: hidden; }
+			.view-box{height: 50px;border: 2px solid black;  overflow: hidden;}
 			.box1{list-style: none;  padding: 0; margin: 0; width: 400%;}
 			.box1::after{display: block; content: ''; clear: both;}
 			li{
 			width: 25%; height: 50px; line-height: 50px; text-align: center;
 			font-size: 25px; float: left; background: yellow;
 			}
+
 		</style>
 </head>
 <body>
@@ -36,6 +35,7 @@
 			<li>3</li>
 			<li>4</li>
 		</ul>
+
 	</div>
 </body>
 </html>
