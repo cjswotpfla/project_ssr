@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>swiper예제</title>
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	<script src="../js/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+	<style>
+		.swiper-container{
+			height: 300px; width: 500px;
+			border: 1px solid black;
+		}
+		.swiper-slide{line-height: 500px; text-align: center;}
+	</style>
+</head>
+<body>
+	<!-- Swiper -->
+	<div class="swiper-container mySwiper">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">Slide 1</div>
+			<div class="swiper-slide">Slide 2</div>
+			<div class="swiper-slide">Slide 3</div>
+			<div class="swiper-slide">Slide 4</div>
+			<div class="swiper-slide">Slide 5</div>
+			<div class="swiper-slide">Slide 6</div>
+			<div class="swiper-slide">Slide 7</div>
+			<div class="swiper-slide">Slide 8</div>
+			<div class="swiper-slide">Slide 9</div>
+		</div>
+		<div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-pagination"></div>
+	</div>
+	<div class="swiper-container mySwiper2">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">Slide 1</div>
+			<div class="swiper-slide">Slide 2</div>
+			<div class="swiper-slide">Slide 3</div>
+			<div class="swiper-slide">Slide 4</div>
+			<div class="swiper-slide">Slide 5</div>
+			<div class="swiper-slide">Slide 6</div>
+			<div class="swiper-slide">Slide 7</div>
+			<div class="swiper-slide">Slide 8</div>
+			<div class="swiper-slide">Slide 9</div>
+		</div>
+		<div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-pagination"></div>
+	</div>
+	<script>
+		var swiper = new Swiper(".mySwiper", {
+			spaceBetween: 30,					//슬라이더와 슬라이더 사이 간격
+			centeredSlides: true,			//슬라이드를 가운데 배치
+			autoplay: {								//자동실행
+				delay: 2500,						//2.5초 간격
+				disableOnInteraction: false, //
+			},
+			pagination: {							//페이지네이션
+				el: ".swiper-pagination",	//swiper-pagination에 요소 갯수에 맞춰 페이지네이션을 만들어줌
+				clickable: true,				//페이지네이션을 클릭할수 있게 할것인지 결정
+			},
+			navigation: {							//왼쪽/오른쪽 버튼
+				nextEl: ".swiper-button-next", 
+				prevEl: ".swiper-button-prev",
+			},
+		});
+		var swiper2 = new Swiper(".mySwiper2",{
+
+		});
+	</script>
+</body>
+</html>
