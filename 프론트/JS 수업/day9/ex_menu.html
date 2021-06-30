@@ -4,13 +4,15 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>메뉴선택</title>
+	<title>메뉴 선택</title>
 	<script src="../js/jquery.min.js"></script>
 	<style>
-		.left3 .menu-box{height: 50px; position: relative; width: 750px;}
+		.left3 .menu-box{
+			height: 50px; position: relative; width: 750px;
+		}
 		.left3 .menu-container-box{
-			height: 50px; width: 748px; overflow: hidden; 
-			border: 1px solid black;
+			height: 50px; width: 750px; overflow: hidden; border: 1px solid black;
+			box-sizing: border-box;
 		}
 		.left3 .menu-wrap-box{
 			width: 400%; height: 50px;
@@ -22,19 +24,23 @@
 			width: 94px; float: left; box-sizing: border-box; border-right: 1px solid black;
 			height: 50px; line-height: 50px; text-align: center;
 		}
-		.left3 .menu .menu-item:nth-child(8n){
-			border-right: none; width: 92px;
-		}
 		.left3 .menu .menu-item:nth-child(8n+1){
 			width: 92px;
 		}
-		.left3 .menu-btn-box .prev-btn, .menu-btn-box .next-btn{
-			width: 40px; height: 40px; background: wheat; border: 2px solid black; border-radius: 50%;
-			text-align: center; line-height: 40px; position: absolute; top: 3px; left: 0; 
-			margin-left: -20px; cursor: pointer; font-size: 25px;
+		.left3 .menu .menu-item:nth-child(8n){
+			border-right: none; width: 92px;
 		}
-		.left3 .menu-btn-box .next-btn{left: auto; right: 0; margin-right:-20px;}
-		.left3 .selected{background: pink;}
+		.left3 .menu-btn-box .prev-btn, .menu-btn-box .next-btn{
+			width: 40px; height: 40px; background: white; border: 2px solid black; border-radius: 50%;
+			text-align: center; line-height: 40px; position: absolute; top: 3px; left: 0; 
+			margin-left: -20px; cursor: pointer;
+		}
+		.left3 .menu-btn-box .next-btn{
+			left: auto; right: 0; margin-right: -20px;
+		}
+		.left3 .selected{
+			background: cornflowerblue;
+		}
 		.left3 .contents-box{
 			width: 750px;
 		}
@@ -43,11 +49,11 @@
 <body>
 	<div class="left3">
 		<div class="menu-box">
+			<div class="menu-btn-box">
+				<div class="prev-btn"><</div>
+				<div class="next-btn">></div>
+			</div>
 			<div class="menu-container-box">
-				<div class="menu-btn-box">
-					<div class="prev-btn"><</div>
-					<div class="next-btn">></div>
-				</div>
 				<div class="menu-wrap-box">
 					<ul class="menu">
 						<li class="menu-item selected" data-target=".menu-box1">메뉴1</li>
@@ -86,7 +92,7 @@
 					</ul>
 				</div>
 			</div>
-		</div>
+		</div>	
 		<div class="contents-box">
 			<div class="menu-box1">박스1</div>
 			<div class="menu-box2">박스2</div>
@@ -121,7 +127,7 @@
 		$(function(){
 			$('.left3 .menu-btn-box .next-btn').click(function(){
 				var selected = $('.left3 .selected');
-				//메뉴 4, 메뉴8, 메뉴 12
+				//메뉴 4, 메뉴8, 메뉴12
 				if(selected.next().length == 0){
 					//마지막 메뉴인 경우(메뉴 12)
 					if(selected.parent().next().length == 0){
@@ -132,37 +138,38 @@
 					ml = parseFloat(ml);
 					var width = $('.left3 .menu').first().width();
 					ml = ml - width;
-					$('.left3 .menu-wrap-box').animate({'margin-left':ml+'px'},1000);
-					//이동 후 다음 큰 메뉴에서 첫번째 메뉴에 selectde 클래스 추가
-					selected.parent().next().children('.left3 .menu-item').first().addClass('selected');
+					$('.left3 .menu-wrap-box').animate({'margin-left':ml+'px'},500);
+					//이동 후 다음 큰 메뉴에서 첫번 째 메뉴에 seleted 클래스 추가
+					selected.parent().next().children('.menu-item').first().addClass('selected');
 					selected.removeClass('selected');
 				}else{
-					//큰 메뉴 내에서 다음으로 이동
+					//큰 메뉴내에서 다음으로 이동
 					selected.removeClass('selected').next().addClass('selected');
 				}
 				$('.left3 .selected').click();
 			})
 			$('.left3 .menu-btn-box .prev-btn').click(function(){
 				var selected = $('.left3 .selected');
-				//메뉴 1, 메뉴5, 메뉴 9
+				//메뉴 1, 메뉴5, 메뉴9
 				if(selected.prev().length == 0){
-					//첫번째 메뉴인 경우
+					//첫번째 메뉴인 경우(메뉴 1)
 					if(selected.parent().prev().length == 0){
 						return;
 					}
 					//애니메이션
 					var ml = $('.left3 .menu-wrap-box').css('margin-left');
 					ml = parseFloat(ml);
-					var width = $('.menu').first().width();
+					var width = $('.left3 .menu').first().width();
 					ml = ml + width;
-					$('.left3 .menu-wrap-box').animate({'margin-left':ml+'px'},1000);
-					//이동 후 다음 큰 메뉴에서 첫번째 메뉴에 selectde 클래스 추가
-					selected.parent().prev().children('.left3 .menu-item').last().addClass('selected');
+					$('.left3 .menu-wrap-box').animate({'margin-left':ml+'px'},500);
+					//이동 후 다음 큰 메뉴에서 첫번 째 메뉴에 seleted 클래스 추가
+					selected.parent().prev().children('.menu-item').last().addClass('selected');
 					selected.removeClass('selected');
 				}else{
-					//큰 메뉴 내에서 다음으로 이동
+					//큰 메뉴내에서 다음으로 이동
 					selected.removeClass('selected').prev().addClass('selected');
 				}
+				$('.left3 .selected').click();
 			})
 			$('.left3 .menu-item').click(function(){
 				$('.left3 .menu-item').removeClass('selected');
@@ -171,20 +178,20 @@
 				$('.left3 .contents-box div').hide();
 				$(target).show();
 				//첫번째 메뉴를 선택하면 이전 버튼 안보이게
-				if(target == '.left3 .menu-box1'){
-					$('.left3 .menu-btn-box .prev-btn').hide();
+				if(target =='.menu-box1'){
+					$('.menu-btn-box .prev-btn').hide()
 				}else{
-					$('.left3 .menu-btn-box .prev-btn').show();
+					$('.menu-btn-box .prev-btn').show()
 				}
 				//마지막 메뉴를 선택하면 다음 버튼 안보이게
-				if(target == '.left3 .menu-box27'){
-					$('.left3 .menu-btn-box .next-btn').hide();
+				if(target =='.menu-box27'){
+					$('.menu-btn-box .next-btn').hide()
 				}else{
-					$('.left3 .menu-btn-box .next-btn').show();
+					$('.menu-btn-box .next-btn').show()
 				}
-			});
+			})
 			$('.left3 .menu-item').eq(0).click();
 		})
 	</script>
 </body>
-</html>
+</html> 
