@@ -51,14 +51,14 @@
 		*/
 		function check(str, regex, emptyMsg, regexMsg){
 			var id = $('input[name=id]').val()
-				var id_error2 = /^[a-z0-9_-]{5,20}$/;
-				if(str == ''){
-					return emptyMsg;
-				}else if(!regex.test(str)){
-					return regexMsg;
-				}else{
-					return '';
-				}
+			var id_error2 = /^[a-z0-9_-]{5,20}$/;
+			if(str == ''){
+				return emptyMsg;
+			}else if(!regex.test(str)){
+				return regexMsg;
+			}else{
+				return '';
+			}
 		}
 	</script>
 
