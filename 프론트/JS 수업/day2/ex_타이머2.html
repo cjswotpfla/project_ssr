@@ -15,9 +15,10 @@
 			누르면 타이머가 종료되도록 코드를 작성하세요.
 			단 타이머는 콘솔에 출력.
 		*/
+		var hour = 0;
 		var second = 0;
 		var minute = 0;
-		console.log(getTime(minute,second));
+		console.log(getTime(hour,minute,second));
 
 
 		var startBtn = document.querySelectorAll('#start');
@@ -26,9 +27,10 @@
 			//타이머 시작 코드
 			id = setInterval(function(){
 				second++;
+				hour = minute == 60? ++hour : hour;
 				minute = second == 60? ++minute : minute;
 				second = second == 60? 0 : second;
-				console.log(getTime(minute,second));
+				console.log(getTime(hour,minute,second));
 			},1000);
 		})
 
@@ -44,10 +46,10 @@
 
 
 		function addZero(num){
-			return num < 10 ? '0' + num : num;
+			return num < 10 ? '0' + num : num 
 		}
-		function getTime(minute, second){
-			return addZero(minute) + ':' + addZero(second);
+		function getTime(hour,minute, second){
+			return addZero(hour) + ':' + addZero(minute) + ':' + addZero(second);
 		}
 	</script>
 </body>
