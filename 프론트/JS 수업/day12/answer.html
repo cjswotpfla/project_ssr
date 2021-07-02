@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>지식인 예제</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+	<script src="../js/jquery.min.js"></script>
+	<script>
+		$(function(){
+			$('.left-btn').on('click',function(){
+				$('.left-btn2').show();
+				$('.left-btn').hide();
+				$('.right-btn2').hide();
+				$('.right-btn').show();
+			})
+			$('.right-btn').on('click',function(){
+				$('.right-btn2').show();
+				$('.right-btn').hide();
+				$('.left-btn').show();
+				$('.left-btn2').hide();
+			})
+		})
+	</script>
+	<style>
+		.container-box{
+			width: 750px; height: 1700px; position: relative;
+		}
+		.button-box{
+			width: 50px; height: 25px; position: relative;
+		}
+		.left-btn, 
+		.right-btn{
+			float: left; width: 24px; height: 24px; border: 1px solid darkgrey;
+			box-sizing: border-box; text-align: center; line-height: 22px; font-size: 12px;
+			cursor: pointer;
+		}
+		.left-btn2, 
+		.right-btn2{
+			float: left; width: 24px; height: 24px; border: 1px solid #19ce60;
+			box-sizing: border-box; text-align: center; line-height: 22px; font-size: 12px;
+			cursor: pointer; display: none;
+		}
+		span.title{
+			font-weight: bold;
+		}
+		.contents-box1{
+			margin-top: 20px;
+		}
+		p.content{
+			font-size: 13px;
+		}
+		.question-box1{
+			border-top: 1px solid darkgrey;
+		}
+		.question-box1:last-child{
+			border-bottom : 1px solid darkgray;
+		}
+		.question-box1:hover{
+			background-color: whitesmoke;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-box">
+		<div class="title-box">
+			<h3>전체</h3>
+			<div class="button-box">
+				<div class="left-btn"><i class="fas fa-th-list"></i></div>
+				<div class="left-btn2"><i class="fas fa-th-list"></i></div>
+				<div class="right-btn"><i class="fas fa-list-ul"></i></div>
+				<div class="right-btn2"><i class="fas fa-list-ul"></i></div>
+			</div>
+		</div>
+		<div class="contents-box1">
+			<div class="question-box1">
+				<span class="title">제가 새아버지 성으로 개명을 할 예정인데 대출 한 내역이 나올까요</span>
+				<p class="content">
+				현재 새아버지와 친어머니와 친동생이랑 같이 거주중인데 다 사이가 돈독하여 개명을 하자 해서
+				동생과 제가 개명을 하려 합니다. 다만 부모님이 대신 신청을 해서 비용을 전부 내주시려 하시는데
+				제가 예전에 개인 채무로 인하여 대출을	받은 적이 있는데 이게 따로 부모님에게 알려질까 두렵네요
+				</p>
+			</div>
+			<div class="question-box1">
+				<span class="title">제가 새아버지 성으로 개명을 할 예정인데 대출 한 내역이 나올까요</span>
+				<p class="content">
+				현재 새아버지와 친어머니와 친동생이랑 같이 거주중인데 다 사이가 돈독하여 개명을 하자 해서
+				동생과 제가 개명을 하려 합니다. 다만 부모님이 대신 신청을 해서 비용을 전부 내주시려 하시는데
+				제가 예전에 개인 채무로 인하여 대출을	받은 적이 있는데 이게 따로 부모님에게 알려질까 두렵네요
+				</p>
+			</div>
+			<div class="question-box1">
+				<span class="title">제가 새아버지 성으로 개명을 할 예정인데 대출 한 내역이 나올까요</span>
+				<p class="content">
+				현재 새아버지와 친어머니와 친동생이랑 같이 거주중인데 다 사이가 돈독하여 개명을 하자 해서
+				동생과 제가 개명을 하려 합니다. 다만 부모님이 대신 신청을 해서 비용을 전부 내주시려 하시는데
+				제가 예전에 개인 채무로 인하여 대출을	받은 적이 있는데 이게 따로 부모님에게 알려질까 두렵네요
+				</p>
+			</div>
+			<div class="question-box1">
+				<span class="title">제가 새아버지 성으로 개명을 할 예정인데 대출 한 내역이 나올까요</span>
+				<p class="content">
+				현재 새아버지와 친어머니와 친동생이랑 같이 거주중인데 다 사이가 돈독하여 개명을 하자 해서
+				동생과 제가 개명을 하려 합니다. 다만 부모님이 대신 신청을 해서 비용을 전부 내주시려 하시는데
+				제가 예전에 개인 채무로 인하여 대출을	받은 적이 있는데 이게 따로 부모님에게 알려질까 두렵네요
+				</p>
+			</div>
+			<div class="question-box1">
+				<span class="title">제가 새아버지 성으로 개명을 할 예정인데 대출 한 내역이 나올까요</span>
+				<p class="content">
+				현재 새아버지와 친어머니와 친동생이랑 같이 거주중인데 다 사이가 돈독하여 개명을 하자 해서
+				동생과 제가 개명을 하려 합니다. 다만 부모님이 대신 신청을 해서 비용을 전부 내주시려 하시는데
+				제가 예전에 개인 채무로 인하여 대출을	받은 적이 있는데 이게 따로 부모님에게 알려질까 두렵네요
+				</p>
+			</div>
+			<div class="question-box1">
+				<span class="title">제가 새아버지 성으로 개명을 할 예정인데 대출 한 내역이 나올까요</span>
+				<p class="content">
+				현재 새아버지와 친어머니와 친동생이랑 같이 거주중인데 다 사이가 돈독하여 개명을 하자 해서
+				동생과 제가 개명을 하려 합니다. 다만 부모님이 대신 신청을 해서 비용을 전부 내주시려 하시는데
+				제가 예전에 개인 채무로 인하여 대출을	받은 적이 있는데 이게 따로 부모님에게 알려질까 두렵네요
+				</p>
+			</div>
+			<div class="question-box1">
+				<span class="title">제가 새아버지 성으로 개명을 할 예정인데 대출 한 내역이 나올까요</span>
+				<p class="content">
+				현재 새아버지와 친어머니와 친동생이랑 같이 거주중인데 다 사이가 돈독하여 개명을 하자 해서
+				동생과 제가 개명을 하려 합니다. 다만 부모님이 대신 신청을 해서 비용을 전부 내주시려 하시는데
+				제가 예전에 개인 채무로 인하여 대출을	받은 적이 있는데 이게 따로 부모님에게 알려질까 두렵네요
+				</p>
+			</div>
+			<div class="question-box1">
+				<span class="title">제가 새아버지 성으로 개명을 할 예정인데 대출 한 내역이 나올까요</span>
+				<p class="content">
+				현재 새아버지와 친어머니와 친동생이랑 같이 거주중인데 다 사이가 돈독하여 개명을 하자 해서
+				동생과 제가 개명을 하려 합니다. 다만 부모님이 대신 신청을 해서 비용을 전부 내주시려 하시는데
+				제가 예전에 개인 채무로 인하여 대출을	받은 적이 있는데 이게 따로 부모님에게 알려질까 두렵네요
+				</p>
+			</div>
+			<div class="question-box1">
+				<span class="title">제가 새아버지 성으로 개명을 할 예정인데 대출 한 내역이 나올까요</span>
+				<p class="content">
+				현재 새아버지와 친어머니와 친동생이랑 같이 거주중인데 다 사이가 돈독하여 개명을 하자 해서
+				동생과 제가 개명을 하려 합니다. 다만 부모님이 대신 신청을 해서 비용을 전부 내주시려 하시는데
+				제가 예전에 개인 채무로 인하여 대출을	받은 적이 있는데 이게 따로 부모님에게 알려질까 두렵네요
+				</p>
+			</div>
+			<div class="question-box1">
+				<span class="title">제가 새아버지 성으로 개명을 할 예정인데 대출 한 내역이 나올까요</span>
+				<p class="content">
+				현재 새아버지와 친어머니와 친동생이랑 같이 거주중인데 다 사이가 돈독하여 개명을 하자 해서
+				동생과 제가 개명을 하려 합니다. 다만 부모님이 대신 신청을 해서 비용을 전부 내주시려 하시는데
+				제가 예전에 개인 채무로 인하여 대출을	받은 적이 있는데 이게 따로 부모님에게 알려질까 두렵네요
+				</p>
+			</div>
+	
+		</div>
+		<div class="contents-box2">
+			<div class="question-box2">
+				<span class="title2">제가 새아버지 성으로 개명을 할 예정인데 대출 한 내역이 나올까요</span>
+				<div class="answer-box">
+					<div class="answer">답변 0</div>
+					<a href="#">가족, 개인.....</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
