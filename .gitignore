@@ -32,6 +32,6 @@ hs_err_pid*
 ### Java-Web ###
 ## ignoring target file
 target/
-.settings
+.settingssssss
 
 # End of https://www.toptal.com/developers/gitignore/api/java,java-web
