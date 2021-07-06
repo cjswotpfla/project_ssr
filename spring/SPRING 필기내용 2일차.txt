@@ -1,0 +1,27 @@
+스프링레거시프로젝트 > 새폴더 만들고 스프링플젝이름 넣기 > 톰캣 깔고 서버 연결 (서버 만들고 연결하기) 
+
+>한글깨짐 방지(인코딩설정)
+https://stajun.tistory.com/entry/%EC%8A%A4%ED%94%84%EB%A7%81-
+%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC2-
+%EC%9D%B8%EC%BD%94%EB%94%A9-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0?category=847086
+
+회원을 관리하기 위해 member 테이블을 생성
+
+MemberVO		- class
+MemberController		- class
+MemberService		- interface
+MemberServiceImp	- class
+MemberDAO		- interface
+MemberMapper		- xml
+
+순차적으로 연결 후 
+
+lombox 
+
+
+singin.jsp에 로그인 화면을 구현하고, 로그인 정보를 입력해서 서버로 데이터를 전송한 후, 서버에서 전송된 데이터를 출력하세요.
+
+signup.jsp 파일을 생성한 후, 회원 가입 화면을 구현하고, 회원 정보를 입력해서 서버로 데이터를 전송한 후,
+서버에서 전송된 데이터를 출력하세요. URI는 /signup
+
+signup 파일 생성
