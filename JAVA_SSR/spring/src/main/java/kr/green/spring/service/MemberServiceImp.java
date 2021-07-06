@@ -26,4 +26,15 @@ public class MemberServiceImp implements MemberService {
 		}
 		return dbUser;
 	}
+
+	@Override
+	public boolean signup(MemberVO user) {
+		//이미 가입된 아이디가 있으면 false를 리턴
+		if(user == null || memberDao.getMember(user.getId()) != null) {
+			return false;
+		}
+		//없으면 다오에게 회원 정보를 주면서 회원가입 하라고 시킨 후 true를 리턴 
+		memberDao.signup(user);
+		return true;
+	}
 }

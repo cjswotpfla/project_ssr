@@ -43,4 +43,24 @@ public class HomeController {
 		}
 		return mv;
 	}
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public ModelAndView signupGet(ModelAndView mv) {
+		mv.setViewName("signup");
+		return mv;
+	}
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public ModelAndView signupPost(ModelAndView mv, MemberVO user) {
+		System.out.println(user);
+		//서비스에게 회원 정보를 주면서 회원 가입하라고 일을 시키고, 회원 가입이 성공하면 true를
+		//실패하면 false를 알려달라고 요청
+		boolean isSignup = memberService.signup(user);
+		//회원 가입에 성공하면 메인으로 실패하면 회원가입 페이지로
+		if(isSignup) {
+			mv.setViewName("redirect:/");	
+		}else {
+			mv.setViewName("redirect:/signup");
+		}
+		
+		return mv;
+	}
 }
