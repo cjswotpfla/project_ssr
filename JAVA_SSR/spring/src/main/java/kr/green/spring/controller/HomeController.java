@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.spring.service.MemberService;
+import kr.green.spring.vo.BoardVO;
 import kr.green.spring.vo.MemberVO;
 import lombok.Data;
 
@@ -50,7 +51,6 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ModelAndView signupPost(ModelAndView mv, MemberVO user) {
-		System.out.println(user);
 		//서비스에게 회원 정보를 주면서 회원 가입하라고 일을 시키고, 회원 가입이 성공하면 true를
 		//실패하면 false를 알려달라고 요청
 		boolean isSignup = memberService.signup(user);
@@ -61,6 +61,15 @@ public class HomeController {
 			mv.setViewName("redirect:/signup");
 		}
 		
+		return mv;
+	}
+	@RequestMapping(value = "/member/mypage", method = RequestMethod.GET)
+	public ModelAndView memberMypageGet(ModelAndView mv, String id) {
+		//서비스에게 아이디를 주면서 회원 정보를 가져오라고 시킴
+		MemberVO user = memberService.getMember(id);
+		//가져온 회원 정보를 화면에 전달
+		mv.addObject("user",user);
+		mv.setViewName("member/mypage");
 		return mv;
 	}
 }
