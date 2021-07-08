@@ -44,7 +44,28 @@ public class BoardController {
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public ModelAndView boardRegisterPost(ModelAndView mv, BoardVO board) {
 		boardService.insertBoard(board);
-		mv.setViewName("redirect:/board/register");
+		mv.setViewName("redirect:/board/list");
 		return mv;
 	}
+	@RequestMapping(value="/board/modify", method=RequestMethod.GET)
+	public ModelAndView boardModifyGet(ModelAndView mv, Integer num) {
+		BoardVO board = boardService.getBoard(num);
+		mv.addObject("board", board);
+		mv.setViewName("board/modify");
+		return mv;
+	}
+	@RequestMapping(value="/board/modify", method=RequestMethod.POST)
+	public ModelAndView boardModifyPost(ModelAndView mv, BoardVO board) {
+		boardService.updateBoard(board);
+		mv.addObject("num", board.getNum());
+		mv.setViewName("redirect:/board/detail");
+		return mv;
+	}
+	@RequestMapping(value="/board/delete")
+	public ModelAndView boardDelete(ModelAndView mv, Integer num) {
+		boardService.deleteBoard(num);
+		mv.setViewName("redirect:/board/list");
+		return mv;
+	}
+	
 }

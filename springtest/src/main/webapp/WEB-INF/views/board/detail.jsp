@@ -34,6 +34,8 @@
 		<textarea class="form-control" readonly>${board.contents}</textarea>
 	</div>
     <a href="<%=request.getContextPath()%>/board/list"><button class="btn btn-outline-danger">목록</button></a>
+    <a href="<%=request.getContextPath()%>/board/modify"><button class="btn btn-outline-success">수정</button></a>
+    <a href="<%=request.getContextPath()%>/board/list"><button class="btn btn-outline-success">삭제</button></a>
 </div>
 </body>
 </html>
