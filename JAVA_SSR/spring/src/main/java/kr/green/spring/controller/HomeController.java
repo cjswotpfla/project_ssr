@@ -29,7 +29,6 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
 	public ModelAndView signinPost(ModelAndView mv,MemberVO user) {
-		System.out.println(user);
 		//서비스에게 아이디와 비밀번호를 전달하면, 해당 정보가 DB에 있으면
 		//회원 정보를 없으면 null을 반환
 		//작업이 다 끝난 후 URI가 /signin인 곳으로 넘어감
@@ -40,6 +39,7 @@ public class HomeController {
 		}//회원 정보가 있으면 => 일치하는 아이디가 없던지, 비밀번호가 잘못되던지
 		 //	   			 => 로그인 실패
 		else {
+			System.out.println("로그인 실패");
 			mv.setViewName("redirect:/signin");
 		}
 		return mv;
@@ -70,6 +70,13 @@ public class HomeController {
 		//가져온 회원 정보를 화면에 전달
 		mv.addObject("user",user);
 		mv.setViewName("member/mypage");
+		return mv;
+	}
+	@RequestMapping(value = "/member/mypage", method = RequestMethod.POST)
+	public ModelAndView memberMypagePost(ModelAndView mv, MemberVO user) {
+		//서비스에게 회원 정보를 주면서 수정하라고 요청
+		memberService.updateMember(user);
+		mv.setViewName("redirect:/member/mypage");
 		return mv;
 	}
 }

@@ -44,5 +44,6 @@
   </c:if>
   <a href="<%=request.getContextPath()%>/board/register"><button class="btn btn-outline-success">글쓰기</button></a>
 </div>
+<!--<img src="<%=request.getContextPath()%>/resources/img/4301d5db4a855.jpg">-->
 </body>
 </html>
