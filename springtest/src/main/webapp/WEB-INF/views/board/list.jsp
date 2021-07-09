@@ -14,6 +14,15 @@
 <body>
 	<div class="container">
 		<h2>게시판</h2>
+		<form class="input-group float-right mb-3" action="<%=request.getContextPath()%>/board/list">
+  			<select class="form-control mr-2" name="type">
+  				<option value="0">전체</option>
+  				<option value="1">제목+내용</option>
+  				<option value="2" >작성자</option>
+ 		 	</select>
+  			<input type="text" class="form-control mr-2" name="search">
+  			<button class="btn btn-outline-primary">검색</button>
+  		</form>
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -36,6 +45,18 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<ul class="pagination justify-content-center">
+		  	<c:if test="${pm.prev}">
+		  		<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/board/list/?page=${pm.startPage-1}&type=${pm.criteria.type}&search=${pm.criteria.search}">이전</a></li>
+		  	</c:if>
+		  	<c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="index">
+		  		<li class="page-item active"><a class="page-link" href="<%=request.getContextPath()%>/board/list/?page=${index}">${index}</a></li>
+		  	</c:forEach>
+		  	
+	    	<c:if test="${pm.next}">
+	    		<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/board/list/?page=${pm.endPage+1}&type=${pm.criteria.type}&search=${pm.criteria.search}">다음</a></li>
+	    	</c:if>
+  		 </ul>
 		<a href="<%=request.getContextPath()%>/board/register"><button class="btn btn-outline-danger">글쓰기</button></a>
 	</div>
 	<!-- 

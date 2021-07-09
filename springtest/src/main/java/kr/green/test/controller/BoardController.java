@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.test.pagination.Criteria;
 import kr.green.test.service.BoardService;
 import kr.green.test.vo.BoardVO;
 import lombok.extern.log4j.Log4j;
@@ -21,8 +22,8 @@ public class BoardController {
 	BoardService boardService;
 	
 	@RequestMapping(value="/list")
-	public ModelAndView list(ModelAndView mv,String msg) {
-		ArrayList<BoardVO> list = boardService.getBoardList();
+	public ModelAndView list(ModelAndView mv,String msg,Criteria cri) {
+		ArrayList<BoardVO> list = boardService.getBoardList(cri);
 		mv.addObject("list", list);
 		mv.addObject("msg", msg);
 		mv.setViewName("board/list");
