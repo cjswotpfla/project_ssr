@@ -18,4 +18,6 @@ public interface BoardDAO {
 	int updateBoard(@Param("board")BoardVO board);
 	
 	int deleteBoard(@Param("board")BoardVO board);
+
+	int getTotalCount(@Param("cri")Criteria cri);
 }

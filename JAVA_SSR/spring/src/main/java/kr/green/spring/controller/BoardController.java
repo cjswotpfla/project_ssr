@@ -22,11 +22,13 @@ public class BoardController {
 
 	@RequestMapping(value="/board/list")
 	public ModelAndView boardList(ModelAndView mv, Criteria cri) {
+		log.info(cri);
 		PageMaker pm = new PageMaker();
 		cri.setPerPageNum(2);		
 		pm.setCriteria(cri);
 		pm.setDisplayPageNum(2);
-		pm.setTotalCount(6);
+		int totalCount = boardService.getTotalCount(cri);
+		pm.setTotalCount(totalCount);
 		pm.calcData();
 		log.info(pm);
 		//서비스에게 모든 게시글을 가져오라고 시킴
