@@ -1,3 +1,4 @@
+
 package kr.green.test.service;
 
 import java.util.ArrayList;
@@ -14,11 +15,8 @@ public interface BoardService {
 
 	void insertBoard(BoardVO board);
 
-	int updateBoard(BoardVO board);
-
 	int deleteBoard(Integer num);
 
-
-	
+	int updateBoard(BoardVO board);
 
 }

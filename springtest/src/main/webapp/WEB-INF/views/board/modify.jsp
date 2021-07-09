@@ -26,7 +26,7 @@
 		<textarea class="form-control" rows="10" name="contents">${board.contents}</textarea>
 	</div>
 	<input type="hidden" value="${board.num}" name="num">
-	<input type="hidden" value="${board.views}" name="views">
+
 	<button type="submit" class="btn btn-outline-success">등록</button>
 </form>
 </body>

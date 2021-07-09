@@ -16,7 +16,4 @@ public interface BoardDAO {
 
 	void insertBoard(@Param("board")BoardVO board);
 
-	int deleteBoard(BoardVO board);
-
-
 }
