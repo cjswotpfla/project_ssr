@@ -20,4 +20,6 @@ public interface BoardService {
 
 	int updateBoard(BoardVO board);
 
+	int getTotalCount(Criteria cri);
+
 }

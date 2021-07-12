@@ -67,4 +67,9 @@ public class BoardServiceImp implements BoardService {
 		dbBoard.setTitle(board.getTitle());
 		return boardDao.updateBoard(dbBoard);
 	}
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		return boardDao.getTotalCount(cri);
+	}
 }

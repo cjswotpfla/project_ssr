@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.test.pagination.Criteria;
+import kr.green.test.pagination.PageMaker;
 import kr.green.test.service.BoardService;
 import kr.green.test.vo.BoardVO;
 import lombok.extern.log4j.Log4j;
@@ -23,7 +24,13 @@ public class BoardController {
 	
 	@RequestMapping(value="/list")
 	public ModelAndView list(ModelAndView mv,String msg,Criteria cri) {
+		cri.setPerPageNum(3);
 		ArrayList<BoardVO> list = boardService.getBoardList(cri);
+		//현재 페이지 정보(검색타입, 검색어)에 대한 총 게시글 수를 가져와야 함
+		int totalCount = boardService.getTotalCount(cri);
+		PageMaker pm = new PageMaker(totalCount,2,cri);
+		log.info(pm);
+		mv.addObject("pm",pm);
 		mv.addObject("list", list);
 		mv.addObject("msg", msg);
 		mv.setViewName("board/list");
