@@ -1,5 +1,7 @@
 package kr.green.test.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +44,29 @@ public class MemberController {
 			mv.setViewName("redirect:/signin");
 		}
 		mv.addObject("user", loginUser);
+		return mv;
+	}
+	@GetMapping(value = "/mypage")
+	public ModelAndView memberMypageGet(ModelAndView mv) {
+		mv.setViewName("member/mypage");
+		return mv;
+	}
+	@PostMapping(value = "/mypage")
+	public ModelAndView mypagePost(ModelAndView mv, MemberVO user, HttpServletRequest r) {
+		MemberVO sessionUser = memberService.getMember(r);
+		if(sessionUser != null && sessionUser.getId().equals(user.getId())) {
+			MemberVO updatedUser = memberService.updateMember(user);
+			if(updatedUser != null) {
+				r.getSession().setAttribute("user", updatedUser);
+			}
+		}
+		mv.setViewName("redirect:/member/mypage");
+		return mv;
+	}
+	@RequestMapping(value = "/signout", method = RequestMethod.GET)
+	public ModelAndView signoutGet(ModelAndView mv, HttpServletRequest r) {
+		r.getSession().removeAttribute("user");
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 }

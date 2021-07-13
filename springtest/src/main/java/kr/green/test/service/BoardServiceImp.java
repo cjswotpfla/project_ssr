@@ -2,12 +2,14 @@ package kr.green.test.service;
 
 import java.util.ArrayList;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.green.test.dao.BoardDAO;
 import kr.green.test.pagination.Criteria;
 import kr.green.test.vo.BoardVO;
+import kr.green.test.vo.MemberVO;
 
 @Service
 public class BoardServiceImp implements BoardService {
@@ -39,20 +41,24 @@ public class BoardServiceImp implements BoardService {
 		return boardDao.updateBoard(board);
 	}
 
-	@Override
-	public void insertBoard(BoardVO board) {
+
+	public void insertBoard(BoardVO board, MemberVO user) {
 		if(board == null) {
 			return;
 		}
+		if(user == null || user.getId() == null || user.getId().trim().length() == 0) {
+			return;
+		}
+		board.setWriter(user.getId());
 		boardDao.insertBoard(board);
 	}
 
 	@Override
-	public int deleteBoard(Integer num) {
-		if(num == null) {
+	public int deleteBoard(Integer num, MemberVO user) {
+		BoardVO board = boardDao.getBoard(num);
+		if(board == null || user == null || !board.getWriter().equals(user.getId())) {
 			return 0;
 		}
-		BoardVO board = boardDao.getBoard(num);
 		board.setValid("D");
 		return boardDao.updateBoard(board);
 	}
@@ -72,4 +78,7 @@ public class BoardServiceImp implements BoardService {
 	public int getTotalCount(Criteria cri) {
 		return boardDao.getTotalCount(cri);
 	}
+
+
+
 }

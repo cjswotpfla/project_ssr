@@ -2,16 +2,17 @@ package kr.green.test.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.green.test.pagination.Criteria;
-import kr.green.test.pagination.PageMaker;
-import kr.green.test.service.BoardService;
-import kr.green.test.vo.BoardVO;
+import kr.green.test.pagination.*;
+import kr.green.test.service.*;
+import kr.green.test.vo.*;
 import lombok.extern.log4j.Log4j;
 
 
@@ -21,6 +22,8 @@ import lombok.extern.log4j.Log4j;
 public class BoardController {
 	@Autowired
 	BoardService boardService;
+	@Autowired
+	MemberService memberService;
 	
 	@RequestMapping(value="/list")
 	public ModelAndView list(ModelAndView mv,String msg,Criteria cri) {
@@ -51,17 +54,19 @@ public class BoardController {
 		return mv;
 	}
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public ModelAndView registerPost(ModelAndView mv, BoardVO board) {
-		log.info(board);
-		boardService.insertBoard(board);
+	public ModelAndView registerPost(ModelAndView mv, BoardVO board, HttpServletRequest r) {
+		MemberVO user = memberService.getMember(r);
+		boardService.insertBoard(board, user);
 		mv.setViewName("redirect:/board/list");
 		return mv;
 	}
 	@RequestMapping(value="/modify", method=RequestMethod.GET)
-	public ModelAndView modifyGet(ModelAndView mv, Integer num) {
+	public ModelAndView modifyGet(ModelAndView mv, Integer num, HttpServletRequest r) {
 		log.info("/board/modify : "+num);
 		BoardVO board = boardService.getBoard(num);
+		MemberVO user = memberService.getMember(r);
 		mv.addObject("board", board);
+		mv.addObject("user", user);
 		mv.setViewName("board/modify");
 		return mv;
 	}
@@ -76,9 +81,10 @@ public class BoardController {
 		return mv;
 	}
 	@RequestMapping(value="/delete", method=RequestMethod.POST)
-	public ModelAndView deletePost(ModelAndView mv, Integer num) {
+	public ModelAndView deletePost(ModelAndView mv, Integer num, HttpServletRequest r) {
 		log.info("/board/delete : "+num);
-		int res = boardService.deleteBoard(num);
+		MemberVO user = memberService.getMember(r);
+		int res = boardService.deleteBoard(num, user);
 		if(res != 0) {
 			mv.addObject("msg",num+"번 게시글을 삭제 했습니다.");
 		}else {

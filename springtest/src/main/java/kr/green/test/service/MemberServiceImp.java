@@ -1,6 +1,8 @@
 
 package kr.green.test.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -52,5 +54,36 @@ public class MemberServiceImp implements MemberService {
 			return dbUser;
 		}
 		return null;
+	}
+
+
+	@Override
+	public MemberVO getMember(HttpServletRequest r) {
+		if(r == null || r.getSession() == null) {
+			return null;
+		}
+		return (MemberVO) r.getSession().getAttribute("user");
+	}
+
+
+	@Override
+	public MemberVO updateMember(MemberVO user) {
+		if(user == null) {
+			return null;
+		}
+		MemberVO dbUser = memberDao.getMember(user.getId());
+		if(dbUser == null) {
+			return null;
+		}
+		dbUser.setGender(user.getGender());
+		dbUser.setEmail(user.getEmail());
+		
+		if(user.getPw() != null && !user.getPw().equals("")) {
+			String encodePw = passwordEncoder.encode(user.getPw());
+			dbUser.setPw(encodePw);
+		}
+		if(memberDao.updateMember(dbUser) == 0)
+			return null;
+		return dbUser;
 	}
 }
