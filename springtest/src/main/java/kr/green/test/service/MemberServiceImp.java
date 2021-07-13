@@ -40,7 +40,17 @@ public class MemberServiceImp implements MemberService {
 
 	@Override
 	public MemberVO signin(MemberVO user) {
-		// TODO Auto-generated method stub
+		if(user == null || user.getId() == null || user.getId().trim().length() == 0
+				|| user.getPw() == null || user.getPw().trim().length() == 0) {
+			return null;
+		}
+		MemberVO dbUser = memberDao.getMember(user.getId());
+		if(dbUser == null) {
+			return null;
+		}
+		if(passwordEncoder.matches(user.getPw(), dbUser.getPw())) {
+			return dbUser;
+		}
 		return null;
 	}
 }

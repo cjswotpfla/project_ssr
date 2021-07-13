@@ -2,7 +2,6 @@ package kr.green.test.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,5 +28,20 @@ public class MemberController {
 		mv.setViewName("redirect:/");
 		return mv;
 	}
-
+	@GetMapping(value = "/signin")
+	public ModelAndView signinGet(ModelAndView mv) {
+		mv.setViewName("member/signin");
+		return mv;
+	}
+	@PostMapping(value = "/signin")
+	public ModelAndView signinPost(ModelAndView mv, MemberVO user) {
+		MemberVO loginUser = memberService.signin(user);
+		if(loginUser != null) {
+			mv.setViewName("redirect:/");	
+		}else {
+			mv.setViewName("redirect:/signin");
+		}
+		mv.addObject("user", loginUser);
+		return mv;
+	}
 }
