@@ -3,8 +3,10 @@ package kr.green.test.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.test.vo.MemberVO;
 import kr.green.test.service.MemberService;
 
 @Controller
@@ -12,9 +14,20 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
-	@RequestMapping(value="/test")
-	public String test(Model model) {
-		System.out.println(memberService.getEmail("abc123"));
-		return "home";
+	@GetMapping(value = "/signup")
+	public ModelAndView signupGet(ModelAndView mv) {
+		mv.setViewName("member/signup");
+		return mv;
 	}
+	/* 매개변수 user를 하면 객체가 생성된 후, 화면에서 전달한 name과 일치하는 값들을 변수명을 가진
+	 * 멤버변수의 setter를 이용하여 값을 재설정 
+	 * 일반적으로 매개변수는 객체를 자동으로 생성하는건 아님,
+	 * */
+	@PostMapping(value = "/signup")
+	public ModelAndView signupPost(ModelAndView mv, MemberVO user) {
+		memberService.signup(user);
+		mv.setViewName("redirect:/");
+		return mv;
+	}
+
 }
