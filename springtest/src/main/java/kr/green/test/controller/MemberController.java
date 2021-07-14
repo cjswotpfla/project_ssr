@@ -68,7 +68,7 @@ public class MemberController {
 		mv.setViewName("redirect:/member/mypage");
 		return mv;
 	}
-	@RequestMapping(value = "/signout", method = RequestMethod.GET)
+	@GetMapping(value = "/member/signout")
 	public ModelAndView signoutGet(ModelAndView mv, HttpServletRequest r) {
 		r.getSession().removeAttribute("user");
 		mv.setViewName("redirect:/");
