@@ -2,10 +2,12 @@ package kr.green.test.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import kr.green.test.vo.MemberVO;
 import kr.green.test.service.MemberService;
@@ -46,19 +48,22 @@ public class MemberController {
 		mv.addObject("user", loginUser);
 		return mv;
 	}
-	@GetMapping(value = "/mypage")
+	@GetMapping(value = "/member/mypage")
 	public ModelAndView memberMypageGet(ModelAndView mv) {
 		mv.setViewName("member/mypage");
 		return mv;
 	}
-	@PostMapping(value = "/mypage")
+	@PostMapping(value = "/member/mypage")
 	public ModelAndView mypagePost(ModelAndView mv, MemberVO user, HttpServletRequest r) {
-		MemberVO sessionUser = memberService.getMember(r);
-		if(sessionUser != null && sessionUser.getId().equals(user.getId())) {
-			MemberVO updatedUser = memberService.updateMember(user);
-			if(updatedUser != null) {
-				r.getSession().setAttribute("user", updatedUser);
-			}
+		//user : 화면에서 보낸 회원 정보, 정상적이라면 바로 수정해도 되지만 
+		//		 개발자 도구를 이용하여 잘못된 정보를 보낼 수 있기 때문에 바로 수정하면 안됨
+		//sUser : 현재 로그인 된 회원 정보 
+		//uUser : 업데이트 된 회원 정보로 user의 아이디와 sUser의 아이디가 일치하지 않으면 null,
+		//		  일치하면 업데이트된 회원 정보 반환 
+		MemberVO sUser = memberService.getMember(r);
+		MemberVO uUser = memberService.updateMember(user,sUser);
+		if(uUser != null) {
+			r.getSession().setAttribute("user", uUser);
 		}
 		mv.setViewName("redirect:/member/mypage");
 		return mv;

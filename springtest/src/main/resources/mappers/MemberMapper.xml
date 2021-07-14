@@ -12,10 +12,10 @@
   </select>
   	<update id="updateMember">
 		update member set
-			pw = #{user.pw},
 			email = #{user.email},
+			pw = #{user.pw},
 			gender = #{user.gender},
-			authority = #{user.authority}
+			name = #{user.name}
 		where id = #{user.id}
 	</update>
 </mapper>

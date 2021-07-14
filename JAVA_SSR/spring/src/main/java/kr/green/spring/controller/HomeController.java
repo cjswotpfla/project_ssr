@@ -70,6 +70,9 @@ public class HomeController {
 	}
 	@RequestMapping(value="/member/mypage", method = RequestMethod.POST)
 	public ModelAndView memberMypagePost(ModelAndView mv, MemberVO user, HttpServletRequest request) {
+		//user는 화면에서 보내온 회원 정보, sessionUser는 세션에 저장된 회원 정보
+		//사용자가 악의적으로 화면에서 회원 아이디를 수정 후 회원 정보를 변경하려고 요청할 때
+		//회원 정보가 바뀌면 안됨 
 		//request에 있는 세션 안에 있는 로그인한 회원 정보를 가져옴
 		MemberVO sessionUser = memberService.getMember(request);
 		//세션에 로그인한 회원 정보가 있고, 세션에 있는 아이디와 수정할 아이디가 같으면 회원 정보 수정함
