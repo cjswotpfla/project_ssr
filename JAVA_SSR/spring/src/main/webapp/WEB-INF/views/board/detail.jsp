@@ -4,8 +4,6 @@
 <!doctype html>
 <html>
 <head>
-	<title>게시글</title>
-	
 </head>
 <body>
 <c:if test="${board != null}">
