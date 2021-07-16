@@ -4,16 +4,13 @@
 <!doctype html>
 <html>
 <head>
-	<title>메인</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <!-- Brand -->
-  <a class="navbar-brand" href="#">Logo</a>
+  <a class="navbar-brand" href="<%=request.getContextPath()%>/">Logo</a>
 
   <!-- Links -->
   <ul class="navbar-nav">
@@ -32,7 +29,7 @@
 	        <a class="dropdown-item" href="<%=request.getContextPath()%>/signup">회원가입</a>
         </c:if>
         <c:if test="${user != null}">
-	        <a class="dropdown-item" href="<%=request.getContextPath()%>/mypage">마이 페이지</a>
+	        <a class="dropdown-item" href="<%=request.getContextPath()%>/member/mypage">마이 페이지</a>
 	        <a class="dropdown-item" href="<%=request.getContextPath()%>/signout">로그아웃</a>
         </c:if>
       </div>

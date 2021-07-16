@@ -115,7 +115,7 @@ public class BoardServiceImp implements BoardService {
 		else if(fileVo != null &&  (file != null && file.getOriginalFilename().length() != 0)) {
 			//업로드되었던 파일을 삭제
 			deleteFileVO(fileVo);
-			insertFileVO(file, board.getNum());
+			insertFileVO(file, board.getNum()); 
 		}
 		*/
 		return boardDao.updateBoard(board);
