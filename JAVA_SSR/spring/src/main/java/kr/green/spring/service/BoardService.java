@@ -21,7 +21,7 @@ public interface BoardService {
 
 	int updateViews(Integer num);
 
-	int updateBoard(BoardVO board, MultipartFile [] file, Integer [] fileNum);
+	int updateBoard(BoardVO board, MultipartFile [] files, Integer [] filenums);
 
 	int deleteBoard(Integer num, MemberVO user);
 

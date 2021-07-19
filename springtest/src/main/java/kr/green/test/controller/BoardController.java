@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.test.vo.FileVO;
 import kr.green.test.pagination.*;
 import kr.green.test.service.*;
 import kr.green.test.vo.*;
@@ -73,14 +74,17 @@ public class BoardController {
 		log.info("/board/modify : "+num);
 		BoardVO board = boardService.getBoard(num);
 		mv.addObject("board", board);
+		ArrayList<FileVO> fileList = boardService.getFileList(num);
+		mv.addObject("fileList",fileList);
 		mv.setViewName("/template/board/modify");
 		return mv;
 	}
 	@RequestMapping(value="/modify", method=RequestMethod.POST)
-	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest r) {
+	public ModelAndView modifyPost(ModelAndView mv, BoardVO board, HttpServletRequest r,
+			MultipartFile[] files, Integer[] filenums) {
 		log.info("/board/modify:POST : " + board);
 		MemberVO user = memberService.getMember(r);
-		int res = boardService.updateBoard(board, user);
+		int res = boardService.updateBoard(board, user, files, filenums);
 		String msg="";
 		mv.setViewName("redirect:/board/detail");
 		if(res == 1)
