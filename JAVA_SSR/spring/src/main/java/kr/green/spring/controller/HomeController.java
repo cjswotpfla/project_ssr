@@ -88,7 +88,7 @@ public class HomeController {
 	@RequestMapping(value = "/signout", method = RequestMethod.GET)
 	public ModelAndView signoutGet(ModelAndView mv, HttpServletRequest request) {
 		request.getSession().removeAttribute("user");
-		mv.setViewName("/template/redirect:/");
+		mv.setViewName("redirect:/");
 		return mv;
 	}
 }
