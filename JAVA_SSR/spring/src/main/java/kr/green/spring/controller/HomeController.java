@@ -3,9 +3,17 @@ package kr.green.spring.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.spring.service.MemberService;
@@ -70,9 +78,6 @@ public class HomeController {
 	}
 	@RequestMapping(value="/member/mypage", method = RequestMethod.POST)
 	public ModelAndView memberMypagePost(ModelAndView mv, MemberVO user, HttpServletRequest request) {
-		//user는 화면에서 보내온 회원 정보, sessionUser는 세션에 저장된 회원 정보
-		//사용자가 악의적으로 화면에서 회원 아이디를 수정 후 회원 정보를 변경하려고 요청할 때
-		//회원 정보가 바뀌면 안됨 
 		//request에 있는 세션 안에 있는 로그인한 회원 정보를 가져옴
 		MemberVO sessionUser = memberService.getMember(request);
 		//세션에 로그인한 회원 정보가 있고, 세션에 있는 아이디와 수정할 아이디가 같으면 회원 정보 수정함
@@ -85,10 +90,25 @@ public class HomeController {
 		mv.setViewName("redirect:/member/mypage");
 		return mv;
 	}
-	@RequestMapping(value = "/signout", method = RequestMethod.GET)
+	@RequestMapping(value="/signout", method = RequestMethod.GET)
 	public ModelAndView signoutGet(ModelAndView mv, HttpServletRequest request) {
 		request.getSession().removeAttribute("user");
 		mv.setViewName("redirect:/");
 		return mv;
+	}
+	@ResponseBody
+	@GetMapping(value="/member/idcheck/{id}")
+	public String memberIdcheckPost(@PathVariable("id") String id) {
+		MemberVO user = memberService.getMember(id);
+		String res = user != null ? "IMPOSSIBLE" : "POSSIBLE";
+		return res;
+	}
+	@ResponseBody
+	@PostMapping(value="/member/signin")
+	public String memberSigninPost(@RequestBody MemberVO user, HttpServletRequest r) {
+		MemberVO dbUser = memberService.signin(user);
+		if(dbUser != null)
+			r.getSession().setAttribute("user", dbUser);
+		return dbUser != null ? "success" : "fail";
 	}
 }
