@@ -109,8 +109,6 @@ $(function(){
 					obj.removeClass('btn-success').addClass('btn-outline-success');
 				}
 				
-				
-				
 			},
 			error : function(xhr, status, e){
 				
@@ -143,6 +141,7 @@ $(function(){
 				if(result == 'ok'){
 					alert('댓글 등록이 완료 되었습니다.');
 					readReply('${board.num}',1);
+					$('.reply-input').val('');
 				}
 			},
 			error : function(xhr, status, e){
@@ -156,8 +155,22 @@ $(function(){
 		var page = $(this).attr('data');
 		readReply('${board.num}',page);	
 	})
+	
 	$(document).on('click','.del-btn',function(){
+		var rp_num = $(this).attr('data');
+		$.ajax({
+			type: 'post',
+			url : '<%=request.getContextPath()%>/reply/del/',
+			data: JSON.stringify({'rp_num' : rp_num}),
+			contentType : "application/json; charset=utf-8",
+			success : function(res, status, xhr){
 			
+				readReply('${board.num}',1);
+			},
+			error : function(xhr, status, e){
+				
+			}
+		})
 	})
 })
 function readReply(rp_bd_num, page){
