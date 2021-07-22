@@ -16,6 +16,8 @@ public interface ReplyService {
 
 	String deleteReply(ReplyVO reply, MemberVO user);
 
+	String updateReply(ReplyVO reply, MemberVO user);
+
 
 
 
