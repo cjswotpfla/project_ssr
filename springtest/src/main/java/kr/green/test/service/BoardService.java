@@ -1,4 +1,3 @@
-
 package kr.green.test.service;
 
 import java.io.IOException;
@@ -11,6 +10,7 @@ import kr.green.test.pagination.Criteria;
 import kr.green.test.vo.BoardVO;
 import kr.green.test.vo.FileVO;
 import kr.green.test.vo.MemberVO;
+import kr.green.test.vo.RecommendVO;
 
 public interface BoardService {
 
@@ -20,11 +20,11 @@ public interface BoardService {
 
 	int updateViews(Integer num);
 
-	void insertBoard(BoardVO board, MemberVO user, MultipartFile[] files);
+	void insertBoard(BoardVO board, MemberVO user, MultipartFile[] files) ;
 
 	int deleteBoard(Integer num, MemberVO user);
 
-	int updateBoard(BoardVO board, MemberVO user, MultipartFile [] file, Integer [] fileNum);
+	int updateBoard(BoardVO board, MemberVO user, MultipartFile[] files, Integer[] filenums);
 
 	int getTotalCount(Criteria cri);
 
@@ -32,5 +32,8 @@ public interface BoardService {
 
 	ResponseEntity<byte[]> downloadFile(String fileName) throws IOException;
 
+	String recommend(int board, int state, MemberVO user);
 
+	RecommendVO getRcommend(Integer num, MemberVO user);
 }
+

@@ -21,6 +21,7 @@ import kr.green.test.utils.UploadFileUtils;
 import kr.green.test.vo.BoardVO;
 import kr.green.test.vo.FileVO;
 import kr.green.test.vo.MemberVO;
+import kr.green.test.vo.RecommendVO;
 
 @Service
 public class BoardServiceImp implements BoardService {
@@ -81,9 +82,9 @@ public class BoardServiceImp implements BoardService {
 		if(user == null || !user.getId().equals(board.getWriter())) {
 			return -1;
 		}
-		//게시글에 있는 첨부파일을 가져옴 
+		//게시글에 있는 첨부파일을 가져옴
 		ArrayList<FileVO> fileList = boardDao.getFileList(num);
-		//첨부파일들을 반복문을 이용하여 하나씩 삭제 처리(이때 서버에 있는 파일을 삭제)
+		//첨부파일들을 반복문을 이용하여 하나씩 삭제처리(이때, 서버에 있는 파이을 삭제)
 		if(fileList != null && fileList.size() != 0) {
 			for(FileVO file : fileList) {
 				deleteFile(file);
@@ -94,7 +95,7 @@ public class BoardServiceImp implements BoardService {
 	}
 
 	@Override
-	public int updateBoard(BoardVO board, MemberVO user, MultipartFile [] files, Integer [] filenums) {
+	public int updateBoard(BoardVO board, MemberVO user, MultipartFile[] files, Integer[] filenums) {
 		if(board == null || board.getNum() <= 0) {
 			return 0;
 		}
@@ -105,16 +106,18 @@ public class BoardServiceImp implements BoardService {
 		if(dbBoard == null || !user.getId().equals(dbBoard.getWriter())) {
 			return -1;
 		}
-		//기존 첨부파일 중 정보가 넘어오지 않은 첨부파일 삭제(화면에서 첨부파일 옆에 있는 x버튼 클릭) 
+		//기존 첨부파일 중 정보가 넘어오지 않은 첨부파일 삭제(화면에서 첨부파일 옆에 있는 x버튼 클릭)
 		//기존 첨부파일 가져옴
 		ArrayList<FileVO> dbFileList = boardDao.getFileList(dbBoard.getNum());
-		//화면에서 가져온 첨부파일을 배열에서 리스트로 변경(리스트에서 제공하는 contains를 이용하기 위해서)
+		
+		//화면 가져온 첨부파일을 배열에서 리스트로 변경(리스트에서 제공하는 contains를 이용하기 위해서)
 		ArrayList<Integer> arrayFilenums = new ArrayList<Integer>();
 		if(filenums != null) {
 			for(int tmp : filenums) {
 				arrayFilenums.add(tmp);
 			}
 		}
+		
 		//기존 첨부파일 중에서 화면에서 가져온 첨부파일에 번호가 없으면 해당 첨부파일 삭제
 		for(FileVO tmp : dbFileList) {
 			if(!arrayFilenums.contains(tmp.getNum())) {
@@ -166,14 +169,14 @@ public class BoardServiceImp implements BoardService {
 	        in.close();
 	    }
 	    return entity;
-	}	
+	}
 	private void deleteFile(FileVO file) {
 		//서버에 있는 파일을 삭제
 		File f = new File(uploadPath + file.getName());
 		if(f.exists()) {
 			f.delete();
 		}
-		//DB에 첨부파일 정보를 삭제 처리 
+		//DB에 첨부파일 정보를 삭제 처리
 		boardDao.deleteFile(file.getNum());
 	}
 	private void insertFile(MultipartFile file, int num) {
@@ -190,5 +193,28 @@ public class BoardServiceImp implements BoardService {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public String recommend(int board, int state, MemberVO user) {
+		if(user == null)
+			return "GUEST";
+		RecommendVO rvo = boardDao.getRecommend(board,user.getId());
+		
+		if(rvo == null) {
+			boardDao.insertRecommend(board, user.getId(), state);
+			return state == 1 ? "UP" : "DOWN";
+		}
+		state = state == rvo.getState() ? 0 : state;
+		rvo.setState(state);
+		boardDao.updateRecommend(rvo);
+		return state == 0 ? "CANCEL": (state == 1 ? "UP" : "DOWN");
+	}
+
+	@Override
+	public RecommendVO getRcommend(Integer num, MemberVO user) {
+		if(num == null || user == null)
+			return null;
+		return boardDao.getRecommend(num, user.getId());
 	}
 }

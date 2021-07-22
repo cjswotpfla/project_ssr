@@ -1,28 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.green.test.dao.BoardDAO">
 	<select id="getBoardList" resultType="kr.green.test.vo.BoardVO">
-		select * from board where valid = 'I'
+		select * from board where valid = 'I' 
 		<if test="cri.type != 1 and cri.type != 2">
-			and (title like concat('%', #{cri.search}, '%')
-			or contents like concat('%', #{cri.search}, '%')
-			or writer like concat('%', #{cri.search}, '%'))
-		</if> 
+			and (title like concat('%', #{cri.search} ,'%')
+			or contents like concat('%', #{cri.search} ,'%')
+			or writer like concat('%', #{cri.search} ,'%'))
+		</if>
 		<if test="cri.type == 1">
-			and (title like concat('%', #{cri.search}, '%')
-			or contents like concat('%', #{cri.search}, '%')
+			and (title like concat('%', #{cri.search} ,'%')
+			or contents like concat('%', #{cri.search} ,'%'))
 		</if>
 		<if test="cri.type == 2">
-			and writer like concat('%', #{cri.search}, '%'))
-		</if>  
-
+			and writer like concat('%', #{cri.search} ,'%')
+		</if>
 		order by num desc
 		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<select id="getBoard" resultType="kr.green.test.vo.BoardVO">
-	select * from board where num = #{num} and valid = 'I'
+		select * from board where valid = 'I' and num = #{num}
 	</select>
 	<update id="updateBoard">
 		update board set
@@ -30,35 +29,46 @@
 			contents = #{board.contents},
 			views = #{board.views},
 			valid = #{board.valid}
-		where num = #{board.num}      
+		where num = #{board.num}
 	</update>
 	<insert id="insertBoard" useGeneratedKeys="true" keyProperty="board.num" parameterType="kr.green.test.vo.BoardVO">
-		insert into board(title,writer,contents)
-			values(#{board.title}, #{board.writer}, #{board.contents})
+		insert into board(title, contents, writer)
+			values(#{board.title}, #{board.contents}, #{board.writer});
 	</insert>
 	<select id="getTotalCount" resultType="int">
-		select count(*) from board where valid = 'I'
+		select count(*) from board where valid = 'I' 
 		<if test="cri.type != 1 and cri.type != 2">
-			and (title like concat('%', #{cri.search}, '%')
-			or contents like concat('%', #{cri.search}, '%')
-			or writer like concat('%', #{cri.search}, '%'))
-		</if> 
+			and (title like concat('%', #{cri.search} ,'%')
+			or contents like concat('%', #{cri.search} ,'%')
+			or writer like concat('%', #{cri.search} ,'%'))
+		</if>
 		<if test="cri.type == 1">
-			and (title like concat('%', #{cri.search}, '%')
-			or contents like concat('%', #{cri.search}, '%')
+			and (title like concat('%', #{cri.search} ,'%')
+			or contents like concat('%', #{cri.search} ,'%'))
 		</if>
 		<if test="cri.type == 2">
-			and writer like concat('%', #{cri.search}, '%'))
-		</if> 
+			and writer like concat('%', #{cri.search} ,'%')
+		</if>
 	</select>
 	<insert id="insertFile">
-		insert into file(board,name,ori_name)
-			values(#{file.board}, #{file.name}, #{file.ori_name})
+		insert into file(board,name,ori_name) 
+		values(#{file.board}, #{file.name}, #{file.ori_name})
 	</insert>
 	<select id="getFileList" resultType="kr.green.test.vo.FileVO">
 		select * from file where state = 'I' and board = #{num}
 	</select>
 	<update id="deleteFile">
 		update file set state = 'D' where num = #{num}
+	</update>
+	<select id="getRecommend" resultType="kr.green.test.vo.RecommendVO">
+		select * from recommend where board = #{board} and id = #{id}
+	</select>
+	<insert id="insertRecommend">
+		insert into recommend(board, id, state) 
+			values(#{board},#{id},#{state})
+	</insert>
+	<update id="updateRecommend">
+		update recommend set state = #{rvo.state} 
+			where board = #{rvo.board} and id = #{rvo.id}
 	</update>
 </mapper>
