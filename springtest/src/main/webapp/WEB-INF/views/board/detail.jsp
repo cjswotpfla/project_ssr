@@ -70,6 +70,17 @@
 				<a class="form-control" href="<%=request.getContextPath()%>/board/download?fileName=${file.name}">${file.ori_name }</a>
 			</c:forEach>
 		</div>
+		<div class="reply form-group">
+			<label>댓글</label>
+			<div class="contents">
+				<div class="reply-list">
+				</div>
+				<div class="reply-box form-group">
+					<textarea class="reply-input form-control mb-2" ></textarea>
+					<button type="button" class="reply-btn btn btn-outline-success">등록</button>
+				</div>
+			</div>
+		</div>
 		<div class="input-group">
 			<a href="<%=request.getContextPath()%>/board/list" class="mr-2"><button class="btn btn-outline-danger">목록</button></a>
 			<c:if test="${board != null && user.id eq board.writer }">
@@ -122,6 +133,38 @@
 				error : function(xhr, status, e){
 					console.log('에러 발생');
 				}
+			})
+		})
+		$('.reply-btn').click(function(){
+			var rp_bd_num = '${board.num}';
+			var rp_me_id = '${user.id}';
+			var rp_content = $('.reply-input').val();
+			
+			if(rp_me_id == ''){
+				alert('댓글을 달려면 로그인하세요.');
+				return ;
+			}
+			
+			var data = {
+					'rp_bd_num' : rp_bd_num, 
+					'rp_me_id'  : rp_me_id, 
+					'rp_content': rp_content};
+			$.ajax({
+				type:'post',
+				url : '<%=request.getContextPath()%>/reply/ins',
+				data: JSON.stringify(data),
+				contentType : "application/json; charset=utf-8",
+				success : function(result, status, xhr){
+					if(result == 'ok'){
+						alert('댓글 등록이 완료 되었습니다.');
+						console.log(data)
+						$('.reply-input').val('');
+					}
+				},
+				error : function(xhr, status, e){
+					
+				}
+				
 			})
 		})
 	})
