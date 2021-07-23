@@ -5,10 +5,7 @@
 <html>
 <head>
 	<title>게시판</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/JS/reply.js"></script>
 	<style>
 	.recommend-btn{
 		font-size: 30px;
@@ -73,14 +70,15 @@
 		<div class="reply form-group">
 			<label>댓글</label>
 			<div class="contents">
-				<div class="reply-list">
-				</div>
+				<div class="reply-list form-group"></div>
+				<ul class="pagination justify-content-center"></ul>
 				<div class="reply-box form-group">
 					<textarea class="reply-input form-control mb-2" ></textarea>
 					<button type="button" class="reply-btn btn btn-outline-success">등록</button>
 				</div>
 			</div>
 		</div>
+		
 		<div class="input-group">
 			<a href="<%=request.getContextPath()%>/board/list" class="mr-2"><button class="btn btn-outline-danger">목록</button></a>
 			<c:if test="${board != null && user.id eq board.writer }">
@@ -93,6 +91,13 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+	//전역변수
+	//게시글 번호
+	var rp_bd_num = '${board.num}';
+	//프로젝트명
+	var contextPath = '<%=request.getContextPath()%>';
+	//아이디
+	var id = '${user.id}';
 	$(function(){
 		var msg = '${msg}';
 		printMsg(msg);
@@ -135,39 +140,45 @@
 				}
 			})
 		})
+	})
+	$(function(){
+		
+		replyService.list(contextPath, rp_bd_num, 1, id);
+		
 		$('.reply-btn').click(function(){
 			var rp_bd_num = '${board.num}';
-			var rp_me_id = '${user.id}';
 			var rp_content = $('.reply-input').val();
-			
+			var rp_me_id = '${user.id}';
 			if(rp_me_id == ''){
-				alert('댓글을 달려면 로그인하세요.');
-				return ;
+				alert('로그인 하세요.');
+				return;
 			}
-			
 			var data = {
-					'rp_bd_num' : rp_bd_num, 
-					'rp_me_id'  : rp_me_id, 
-					'rp_content': rp_content};
-			$.ajax({
-				type:'post',
-				url : '<%=request.getContextPath()%>/reply/ins',
-				data: JSON.stringify(data),
-				contentType : "application/json; charset=utf-8",
-				success : function(result, status, xhr){
-					if(result == 'ok'){
-						alert('댓글 등록이 완료 되었습니다.');
-						console.log(data)
-						$('.reply-input').val('');
-					}
-				},
-				error : function(xhr, status, e){
-					
-				}
-				
-			})
+					'rp_bd_num' : rp_bd_num,
+					'rp_content': rp_content,
+					'rp_me_id'  : rp_me_id
+			};
+			
+			replyService.insert(contextPath, data);
 		})
+		$(document).on('click','.pagination .page-item', function(){
+			var page = $(this).attr('data');
+			replyService.list(contextPath,rp_bd_num,page,id);
+		})
+		$(document).on('click','.mod-btn', function(){
+			var contentObj = $(this).parent().prev().children().last();
+			var str = 
+				'<div class="reply-mod-box form-group">'+
+					'<textarea class="reply-input form-control mb-2" >'+contentObj.text()+'</textarea>'+
+					'<button type="button" class="reply-mod-btn btn btn-outline-success">등록</button>'+
+				'</div>';
+			contentObj.after(str).remove();
+			
+			$(this).parent().remove();
+		});
 	})
+	
+	
 	</script>	
 </body>
 </html>
