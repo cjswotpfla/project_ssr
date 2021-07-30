@@ -5,7 +5,7 @@
 <html>
 <head>
 	<title>게시판</title>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/JS/reply.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/reply.js"></script>
 	<style>
 	.recommend-btn{
 		font-size: 30px;
@@ -34,15 +34,10 @@
 			<label>조회수</label>
 			<input type="text" class="form-control" name="views" value="${board.views}" readonly>
 		</div>
+		
 		<div class="form-group">
 			<label>내용</label>
 			<div class="form-control" style="min-height:400px;">${board.contents }</div>
-		</div>
-		<div class="form-group">
-			<label>첨부파일</label>
-			<c:forEach items="${fileList }" var="file">
-				<a class="form-control" href="<%=request.getContextPath()%>/board/download?fileName=${file.name}">${file.ori_name }</a>
-			</c:forEach>
 		</div>
 		<div class="reply form-group">
 			<label>댓글</label>
@@ -55,17 +50,11 @@
 				</div>
 			</div>
 		</div>
-		
-		<div class="input-group">
-			<a href="<%=request.getContextPath()%>/board/list" class="mr-2"><button class="btn btn-outline-danger">목록</button></a>
-			<c:if test="${board != null && user.id eq board.writer }">
-				<a href="<%=request.getContextPath()%>/board/modify?num=${board.num}" class="mr-2"><button class="btn btn-outline-danger">수정</button></a>
-				<form action="<%=request.getContextPath()%>/board/delete" method="post" class="mr-2">
-					<input type="hidden" value="${board.num }" name="num">
-					<button class="btn btn-outline-danger">삭제</button>
-				</form>
-			</c:if>
-		</div>
+		<c:if test="${board.groupOrd == 0 && (user != null && user.authority != 'USER')}">
+			<a href="<%=request.getContextPath()%>/board/reply/register?oriNo=${board.num}">
+				<button class="btn btn-outline-success">답변</button>
+			</a>
+		</c:if>
 	</div>
 </body>
 </html>
