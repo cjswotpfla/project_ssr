@@ -22,4 +22,8 @@ public interface BoardDAO {
 	void deleteReplyBoard(Integer num);
 
 	void insertFile(FileVO file);
+
+	void updateViews(Integer num);
+
+	ArrayList<FileVO> selectFileList(Integer num);
 }
