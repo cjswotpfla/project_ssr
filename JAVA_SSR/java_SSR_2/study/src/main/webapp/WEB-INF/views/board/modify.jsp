@@ -4,7 +4,6 @@
 <!doctype html>
 <html>
 <head>
-	<title>게시글 수정</title>
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 </head>
@@ -45,6 +44,11 @@
 			$(this).parent().remove();
 			$('.file-box').append('<input type="file" class="form-control" name="fileList">');
 		})
+	    $('#summernote').summernote({
+	          placeholder: 'Hello Bootstrap 4',
+	          tabsize: 2,
+	          height: 100
+	    });
 	})
 </script>
 </body>
